@@ -1,14 +1,349 @@
-\documentclass{article}
+\documentclass[12pt]{report}
 \usepackage[utf8]{inputenc}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{tocloft}
+\usepackage{ragged2e}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\usepackage[bookmarks]{hyperref}
+\usepackage{tabularx}
 
-\title{Thesis}
-\author{oswald.capriles46 }
-\date{June 2022}
+\doublespacing
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{1em}
+
+\setlength{\cftbeforetoctitleskip}{0pt}
+\addtocontents{toc}{\vspace{-4ex}}
+
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\thesection\arabic{subsection}.}
+
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\contentsname}
+    {\hfill\bfseries\normalsizeÍNDICE\hfill}
+
+\titleformat{\section}{\bfseries}{\thesection}{0.5em}{}[]
+\titleformat{\subsection}{\bfseries}{\thesubsection}{0.5em}{}[]
+
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+
+%\titlecontents{section}[]{}
+%{\thecontentslabel\enspace}{}
+%{\titlerule*{.}\contentspage}[\vskip 0.5em]
+
+%\titlecontents{subsection}[3em]{}
+%{\thecontentslabel\enspace}{}
+%{\titlerule*{.}\contentspage}[]
+
+\title{HERRAMIENTA INTERACTIVA PARA AUTOMATIZAR LOS PROCESOS DE EXTRACCIÓN DE INFORMACIÓN WEB}
+\author{Oswaldo Augusto Capriles Allegra}
+\date{Abril de 2019}
 
 \begin{document}
 
-\maketitle
+% ----- Title page ----- %
 
-\section{Introduction}
+\begin{titlepage}
+\begin{center}
+
+\includegraphics[width=1in]{assets/UC_logo.png} \\
+UNIVERSIDAD DE CARABOBO \\
+FACULTAD EXPERIMENTAL DE CIENCIA Y TECNOLOGÍA \\
+LICENCIATURA EN COMPUTACIÓN
+
+\vfill
+
+\textbf{HERRAMIENTA INTERACTIVA PARA AUTOMATIZAR LOS PROCESOS DE EXTRACCIÓN DE INFORMACIÓN WEB}
+
+Proyecto de Trabajo Especial de Grado
+
+\vfill
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill} }  l l  }
+  \textbf{AUTOR:} & \textbf{TUTOR:} \\
+  Oswaldo Augusto Capriles Allegra  & Marylin Giugni \\
+\end{tabular*}
+
+\vspace{1em}
+
+Bárbula, Abril de 2019
+ 
+\end{center}
+\end{titlepage}
+
+% ----------------- %
+
+\tableofcontents{}
+\break
+
+% ----------------- %
+
+\begin{center}
+
+\includegraphics[width=1in]{assets/UC_logo.png} \\
+UNIVERSIDAD DE CARABOBO \\
+FACULTAD EXPERIMENTAL DE CIENCIA Y TECNOLOGÍA \\
+LICENCIATURA EN COMPUTACIÓN \\
+
+\vspace{2em}
+
+\textbf{HERRAMIENTA INTERACTIVA PARA AUTOMATIZAR LOS PROCESOS DE EXTRACCIÓN DE INFORMACIÓN WEB}
+
+\vspace{1em}
+
+\textbf{RESUMEN}
+\phantomsection
+\addcontentsline{toc}{section}{Resumen}
+
+\vspace{-1em}
+
+\end{center}
+
+\begin{spacing}{1.5}
+Hoy en día la información tiene una participación muy importante en nuestra sociedad, a partir de la información basamos nuestras decisiones y por ello siempre estamos buscando distintas y nuevas maneras para buscar y extraer más datos. El internet es la base de datos más grande que existe, el problema radica en la dificultad de extraer y procesar esta información debido a la forma en como se presenta en la mayoría de los casos.
+En este proyecto se presenta el desarrollo de una herramienta para automatizar cualquier tipo de interacción con la página web con el fin de facilitar la extracción de los datos. Para cada página web el usuario puede definir recetas que permiten interactuar y extraer información a través de comandos, los datos pueden ser importados en el programa para ser usados como entrada para las recetas, una vez la información es extraída el usuario puede exportar los datos a algun formato para ser procesados posteriormente. Este programa extrae información de una forma relativamente fácil comprender, simplificando el proceso de extracción de datos de la mayoria de paginas web.
+\end{spacing}
+
+
+\noindent
+\textbf{Palabras Claves}: Web Scraping, Minería de Datos, Extracción de Datos, Automatización. \\
+\textbf{Fecha Aproximada de Culminación}: Agosto, 2019
+
+\break
+
+% ----------------- %
+
+\noindent
+\textbf{TERMINOLOGÍA}
+\phantomsection
+\addcontentsline{toc}{section}{Terminología}
+
+Data mining o minería de datos, suele referirse al procesamiento de una gran cantidad de información en conjunto con el uso de tecnologías y herramientas como machine learning, estadística y sistemas de base de datos, con el fin de descubrir patrones. El objetivo de este análisis es extraer información útil y transformarla a una forma estructurada para su uso posterior.
+
+Web mining, hace referencia a la aplicación de técnicas usadas en la minería de datos para descubrir patrones en la web.
+
+Web scraping consiste en el proceso de extracción de datos de una página web, generalmente este proceso consiste en hacer una petición al servidor, procesar la data de acuerdo al formato que tenga y extraer la información.
+
+Web crawlers o arañas, son programas que navegan y descargan páginas web siguiendo hipervínculos de una manera sistemática con el fin de extraer información.
+
+Una API (Application Programming Interface) en términos generales consiste en un conjunto de métodos bien definidos de comunicación entre varios componentes. En el contexto de la Web una API hace referencia a una interfaz para el servidor que ofrece un conjunto de métodos para interactuar con el mismo.
+
+
+\break
+
+% ----------------- %
+
+\noindent
+\textbf{INTRODUCCIÓN}
+\phantomsection
+\addcontentsline{toc}{section}{Introducción}
+
+La información es uno de los recursos más importantes del mundo, y con el continuo avance de la tecnología sin duda nos hacemos más dependientes de este recurso. El crecimiento explosivo de la disponibilidad de los datos en la web ha hecho público el acceso del más grande banco de datos del mundo (Khalil \& Fakir, 2017). Basamos nuestras decisiones en la información que tenemos y la fuente de informacion mas grande hoy en dia es el internet.
+
+El proceso de extracción de datos de páginas web se denomina web scraping, este proceso tiene importantes aplicaciones en la indexación web y la minería de datos. Las empresas suelen utilizar web scraping para obtener datos de la competencia, muchas aplicaciones para búsqueda de ofertas extraen datos de múltiples páginas web para comparar y determinar cuál es la más beneficiosa.
+
+Varias paginas estan ofreciendo APIs para agregar valor a sus servicios (Penman, Balwin \& Martinez, 2009). Sin embargo, usualmente las páginas no proveen una API para consultar la información requerida, incluso pueden tener una API que no ofrece la información que se necesita, la gran mayoría de los sitios muestran la información cubierta de una gran capa de HTML que no permite el fácil acceso a los datos. Por ello surgen soluciones que utilizan otras maneras para extraer la información, lo más común es analizar el código fuente de la página y aplicar alguna técnica de extracción que utiliza XPath o selectores CSS. Los XPath y los selectores CSS determinan un conjunto de elementos presentes en la página web, estos elementos pueden ser procesados para obtener la información buscada.
+
+Dependiendo de la página, la dificultad para extraer los datos puede variar, en algunos casos la página es dinámica y es necesario que se ejecute javascript para obtener la data que se busca. En otros casos la información solo puede ser mostrada cuando entras a la página con tu usuario. Es decir, en esos casos el programa debe tener la misma funcionalidad que un navegador, para ello existen librerías como Selenium que ofrecen una interfaz para controlar el navegador desde algún lenguaje de programación como Python.
+
+Antes de realizar un programa que extraiga la información se hace un reconocimiento de la página, primero se trata de extraer los datos usando los métodos más sencillos y se estudia el comportamiento de la página frente a estos métodos. Normalmente los pasos consisten en, buscar la existencia de una API, determinar si los datos están presentes en el código fuente de forma que solo se tenga que hacer una simple petición a la página, y finalmente solo si es conveniente se utiliza el navegador para extraer los datos.
+
+Sin embargo, hay casos en los que resulta más convenientes usar un navegador, sobre todo cuando se tiene que iniciar sesión en la página que se está extrayendo. Se puede simular el inicio de sesión y guardar la sesión manualmente pero en la mayoría de los casos no vale la pena.
+
+Dicho esto, la finalidad de este proyecto radica en la implementación de una herramienta que simplifique el proceso de extracción de datos de la web. Para ello se propone realizar una extensión de navegador que sirva como interfaz para definir "recetas" que especifican a través de comandos ingresados por el usuario la manera de interactuar y extraer información de la página.
+
+La ventaja de utilizar una extensión para controlar el navegador no solo radica en el hecho de ser una solución multi plataforma, sino también se puede notar en casos donde la extracción de datos requiere intervención humana, por ejemplo, en una página donde se tenga que iniciar sesión y ingresar un código de seguridad que es enviado al correo. Sería muy tedioso realizar un programa que se encargue de todo eso, es por ello que una solución que explote el acceso al estado actual del navegador a través de una extensión es muy apropiado.
+
+Para definir qué páginas van a ser procesadas, estas deben ser importadas para luego ser aplicadas como parámetros de la recetas. Siguiendo un enfoque funcional, la información extraída sería el resultado de la función que en este caso es la receta, el usuario tendría la libertad de especificar el formato y estrategia para exportar los resultados obtenidos.
+
+
+\break
+
+% ----------------- %
+
+\section[Planteamiento del Problema]{PLANTEAMIENTO DEL PROBLEMA}
+
+La gran mayoría de la información en la web es presentada como documentos HTML, un esquema para representar la manera en cómo será mostrada, en esta forma la data es información no estructurada (Chaulagain, Pandey, Basnet, \& Shakya, 2017). En estos casos los datos no pueden ser manipulados fácilmente como si de una base de datos se tratase, por lo que es necesario hacer uso de programas que se encargan de extraer esa información de la página.
+
+Debido a que la información está presentada en función de la interacción que tiene el usuario con la página web, los programas deben ser capaces de simular sin ningun problema esta interacción con el fin de obtener la información deseada. Esto implica que tiene que haber una forma para especificar al programa las acciones que debe realizar sobre la página.
+
+El conocimiento necesario para utilizar estos programas varía, entre los más fáciles de usar contamos con soluciones interactivas como Octoparse o Data Miner, que ofrecen una gran variedad de funciones para facilitar el proceso de extracción. Esto permite que usuarios sin conocimientos avanzados en programación puedan definir como extraer datos de páginas web simplemente seleccionando los elementos que contienen la información.
+
+Al implementar una solución que cumpla con estos aspectos, se tiene que tomar en cuenta la estrategia para importar y exportar la información, ya que es común que no se extraigan datos de una sola página, sino de una lista de páginas. Es decir, la herramienta debe ser capaz de importar un conjunto de páginas y al momento de extraer la información el usuario debe ser capaz de especificar cómo procesar esas páginas y como se debe exportar la información extraída para cada una.
+
+\break
+
+% ----------------- %
+
+\section[Objetivos]{OBJETIVOS}
+
+\subsection{Objetivo General}
+Desarrollar una herramienta interactiva para automatizar los procesos de extracción de información web.
+
+\subsection{Objetivos Específicos}
+\begin{itemize}
+\setlength\itemsep{0pt}
+
+\item Realizar una investigación en el área de las herramientas interactivas para la extracción de información de paginas web.
+\item Seleccionar la metodologia de desarrollo de software que mejor se ajuste a este proyecto.
+\item Seleccionar un conjunto de tecnologías que hagan posible el desarrollo de esta herramienta.
+\item Definir un modelo de comunicación entre el programa y la web.
+\item Diseñar los procesos a llevar a cabo por el usuario para extraer, importar y exportar información al utilzar el programa.
+\item Desarrollar un prototipo funcional del programa.
+
+\end{itemize}
+
+\break
+
+% ----------------- %
+
+\section[Justificación]{JUSTIFICACIÓN}
+
+Este proyecto supone una solución para recrear cualquier tipo de interacción con el navegador por medio de una interfaz interactiva que permita especificar una secuencia de comandos que determinan el proceso a realizar para extraer unos datos en específico de la web.
+
+Extraer información de internet puede parecer un problema trivial si se trata de hacer de forma manual, es decir, copiando la información de interés y pegandola en algún tipo de archivo. Pero esto es una actividad que dependiendo del tipo y la cantidad de información puede llevar muchas horas, esto puede ser inaceptable debido a que el tiempo es un recurso muy valioso, ya sea porque se necesite la información lo más pronto posible o porque quizá automatizando esta tarea se reduzcan costos para una empresa. 
+
+Debido a la importancia de esta actividad, buscar una alternativa usando la tecnología para automatizar esta clase de procesos es indispensable, en algunos casos la información estaría disponible en una API y en otros sería necesario una forma de simular la interacción del usuario con el navegador para poder acceder a la información deseada.
+
+Para entender algunos de los beneficios de la creación de esta herramienta tenemos que imaginar lo que implica automatizar este proceso. Es probable que se requiera un estudio de la disposición de los datos en la página web antes de hacer un programa que se encargue de extraer la información, si tomamos en cuenta el proceso de elaboración de este tipo de programas podemos observar que es necesario de personas que tengas conocimientos en programación y tecnologías web, añadiendo al hecho de que al realizar un programa se deben tomar en cuenta errores o casos inesperados que puedan ocurrir durante el proceso de extracción. 
+
+Conociendo los problemas recurrentes que se presentan durante la automatización de la extracción de información web se pueden generalizar e implementar soluciones que simplifiquen este proceso, este proyecto presenta estas soluciones a través de una herramienta para importar un conjunto de páginas web, especificar de manera sencilla la interacción, seleccionar los elementos que contengan información y finalmente exportar los resultados.
+
+\break
+
+% ----------------- %
+
+\section[Antecedentes]{ANTECEDENTES}
+
+En función de simplificar el desarrollo de este proyecto y evitar posibles problemas que ya fueron solucionados, fueron revisados varios proyectos y publicaciones relacionados con la automatización de la interacción web y la extracción de datos.
+
+Entre los proyectos orientados al desarrollo y automatización de pruebas de aplicaciones está Selenium, el cual es un framework que ofrece una interfaz multiplataforma a través de un driver que permite la comunicación con el navegador. Selenium soporta la API de Webdriver (Stewart \& Burns, 2012), por cada comando una petición HTTP es creada y enviada al driver del navegador, el driver usa un servidor HTTP para recibir las peticiones y luego el servidor determina los pasos necesarios para ejecutar el comando.
+
+A través de extensiones del navegador se pueden crear una experiencia interactiva para la automatización de tareas, Selenium IDE es una extensión que provee una interfaz fácil de usar para el desarrollo de pruebas automatizadas (Selenium Documentation, 2019). Aquí el usuario puede especificar una secuencia de comandos por ejecutar en el navegador, incluso te permite grabar las acciones que se hagan y reproducirlas.
+
+Los proyectos enfocados a la extracción de datos que ofrecen alguna interfaz interactiva generalmente solo buscan facilitar la selección y exportación de la información del programa, proporcionando el nivel de automatización necesaria para la mayoría de los casos. 
+
+DataMiner es un ejemplo de una extensión para el navegador que facilita la extracción de datos de la web, se pueden seleccionar elementos o especificar un patrón por CSS y también permite exportar los datos en varios formatos. Aunque no se pueden realizar tareas muy complicadas con esta herramienta, como extraer información de un conjunto de páginas. 
+
+Una de las herramientas más populares para web scraping es Octoparse, esta herramienta permite la creación de procesos de forma interactiva y es capaz de detectar los elementos que se buscan extraer haciendo un simple click.
+
+En contraste con todas estas herramientas, en este proyecto se busca hacer una herramienta más flexible que otorgue al usuario más control sobre el proceso de extracción basándonos en tecnologías para el desarrollo de pruebas.
+
+\begin{enumerate}
+
+\item Glez-Peña, D., Lourenço, A., López-Fernández, H., Reboiro-Jato, M., \& Fdez-Riverola, F. (2013) publicaron un trabajo titulado "Web Scraping technologies in an API world", en este trabajo se hace referencia a la problemática existente en los casos donde no existe alguna API que ofrezca la información de interés, se comparan varios frameworks y herramientas utilizados en web scraping para demostrar lo fácil que es hoy en dia extraer información de internet, luego se exponen dos casos de uso comunes en el área biomedicinal para ilustrar la importancia de estas herramientas, de esta forma tenemos las bases teóricas para justificar la importancia de la aplicación de web scraping.
+
+\item Niranjanamurthy, M., Kumar, R. A., Srinivas, S., \& Manoj, R. K. (2014), presentaron un trabajo de investigación llamado "Research Study on Web Application Testing using Selenium" en donde se discuten y explican qué es Selenium y Selenium IDE, y porque se utiliza en el contexto de desarrollo de pruebas de aplicaciones web, podemos llevar estos conceptos de automatización y usarlos como base para la parte de interacción con el navegador del presente trabajo.
+
+\item Hackinger, J. (2018), presentó un trabajo bajo el nombre de "DataGorri: a tool for automated data collection of tabular web content" en donde presenta una herramienta para la extracción de la información contenida en tablas de páginas web, en este caso el usuario define un modelo partiendo de la estructura de cada página en el cual el programa se basa para extraer la data, a diferencia del presente proyecto que no está restringido a información tabulada.
+
+\item Chaulagain, R. S., Pandey, S., Basnet, S. R., \& Shakya, S. (2017), presentaron un trabajo titulado "Cloud Based Web Scraping for Big Data Applications" que propone una arquitectura basada en la nube para web scraping para aplicaciones de big data, este tipo de servicios aprovechan el uso de esta tecnología para proveer de una plataforma dedicada a la extracción de datos, de esa forma el servidor haría todo el trabajo y podría agilizar todo el proceso, también se hace referencia a Selenium como una de las herramientas que utilizaron ya que simula la interacción de un usuario con el navegador, a pesar de que el presente proyecto no plantea una solución basada en la nube, podemos tomar ciertos puntos como referencia durante el desarrollo.
+
+\item Penman, R. B., Baldwin, T., \& Martínez, D. (2009), publicaron un trabajo titulado "Web Scraping Made Simple with SiteScraper" en donde presentan una herramienta que permite extraer datos de la web basado en los patrones existentes en múltiples páginas del mismo tipo, y así generar una query XPath que contenga el elemento deseado, lo malo de este enfoque es que requiere de un procesamiento previo a la extracción de datos, este trabajo es un ejemplo de una solución distinta para la extracción de datos sin la intervención del usuario, a diferencia del presente proyecto que espera que el usuario defina la ubicación del elemento deseado de forma interactiva.
+
+\end{enumerate}
+
+\break
+
+% ----------------- %
+
+\section[Limitaciones]{LIMITACIONES}
+
+No existe la herramienta perfecta, puede que algunos casos requieren un gran nivel de complejidad para extraer los datos, en esos casos el programa puede que agregue un nivel de complejidad innecesario.
+
+La herramienta solo facilita el proceso de extracción y no está hecha para hacer crawlers.
+
+La soluciones planteadas consisten en extraer datos de la pagina relativos a su estructura, por lo que cambios en la estructura causaron que se requiera volver a crear un nuevo proceso o receta para extraer esos datos.
+
+Muchas veces es útil paralelizar la extracción de datos haciendo peticiones a múltiples páginas web al mismo tiempo, pero al ser un enfoque basado en la utilización del navegador para extraer los datos, podría causar problemas si intentamos paralelizar.
+
+\break
+
+% ----------------- %
+
+\section[Metodología]{METODOLOGÍA}
+
+La metodología a ser usada en un proyecto depende de la disposición de los recursos, en este caso, el tiempo es el recurso más importante a tomar en cuenta. Las metodologías ágiles consisten en un enfoque de desarrollo de software en donde los requerimientos evolucionan de acuerdo a las necesidades que se presenten, haciendo énfasis en la entrega rápida de un producto.
+
+Concretamente se ha seleccionado para este proyecto Scrum, el cual es un framework iterativo e incremental para planificar el desarrollo de un proyecto a través de un enfoque empírico donde el problema no tiene que ser completamente entendido o definido antes de atacarlo. Scrum define un conjunto de principios y estrategias a seguir en el desarrollo del proyecto, previamente al desarrollo se realiza un "Product Backlog" donde se definen los requerimientos del proyecto.
+
+Se desarrollará el proyecto durante ciclos de 2 semanas para trabajar en los requerimientos específicos definidos para el ciclo actual en el "Sprint Backlog", al final de cada ciclo se hace una revisión del estado del proyecto y se planifica acorde el siguiente ciclo.
+
+En resumen el proceso de desarrollo consiste en:
+
+\begin{itemize}
+\setlength\itemsep{0pt}
+
+\item Planificación del ciclo: Durante este evento se decide los requerimientos que deben ser trabajados tomando en cuenta su prioridad y disposición, el resultado es el "Sprint Backlog" que se utilizará como referencia durante cada día de desarrollo.
+\item Desarrollo del ciclo: Cada día se trabaja en los requerimientos definidos para el ciclo tratando de cumplir con todas las tareas planificadas previamente.
+\item Revisión y retrospección del ciclo: En este evento se hace una revisión y se prueban los resultados obtenidos, tomando en cuenta los resultados esperados se hace una inspección sobre el ciclo pasado y se hace un esfuerzo en agregar mejoras para el proyecto.
+
+\end{itemize}
+
+\break
+
+% ----------------- %
+
+\section[Plan de Trabajo]{PLAN DE TRABAJO}
+
+\noindent
+\begin{tabularx}{1\textwidth}{ |X|l|l|l| }
+
+\hline
+Actividad & Inicio & Fin & Tiempo Estimado \\
+\hline
+Realizar una investigación en el área de las herramientas interactivas para la extracción de información de paginas web. & Abril 2019 & Abril 2019 & 1 semana \\
+\hline
+Seleccionar la metodologia de desarrollo de software que mejor se ajuste a este proyecto. & Abril 2019 & Mayo 2019 & 1 semana \\
+\hline
+Seleccionar un conjunto de tecnologías que hagan posible el desarrollo de esta herramienta. & Mayo 2019 & Mayo 2019 & 1 semana \\
+\hline
+Definir un modelo de comunicación entre el programa y la web. & Mayo 2019 & Mayo 2019 & 1 semana \\
+\hline
+Diseñar los procesos a llevar a cabo por el usuario para extraer, importar y exportar información al utilzar el programa. & Mayo 2019 & Mayo 2019 & 2 semanas \\
+\hline
+Desarrollar un prototipo funcional del programa. & Mayo 2019 & Julio 2019 & 2 Meses \\
+\hline
+Redactar el Trabajo Especial de Grado & Agosto 2019 & Agosto 2019 & 3 Semanas \\
+\hline
+  
+\end{tabularx}
+
+\break
+
+% ----------------- %
+
+\section[Bibliografía]{BIBLIOGRAFÍA}
+
+\begin{itemize}
+\setlength{\itemsep}{0.5em}
+
+\item Penman, R. B., Baldwin, T., \& Martínez, D. (2009). Web scraping made simple with sitescraper.
+\item Selenium Documentation. (2019). Recuperado de https://www.seleniumhq.org/docs/
+\item Cording, P. H., \& Lyngby, K. (2011). Algorithms for web scraping. PDF] Available: \\
+http://www2.imm.dtu.dk/pubdb/views/publicationdetails.php.
+\item da Silva, A. S., \& Teixeira, J. S. A Brief Survey of Web Data Extraction Tools.
+\item Network, M. D. (2011). CSS selectors. url: \\
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS\_Selectors.
+\item Network, M. D. (2011). XPath. url: \\
+https://developer.mozilla.org/en-US/docs/Web/XPath
+\item Khalil, S., \& Fakir, M. (2017). RCrawler: An R package for parallel web crawling and scraping. Software X, 6, 98-106.
+\item Chaulagain, R. S., Pandey, S., Basnet, S. R., \& Shakya, S. (2017, November). Cloud Based Web Scraping for Big Data Applications. In Smart Cloud (SmartCloud), 2017 IEEE International Conference on (pp. 138-143). IEEE.
+\item Glez-Peña, D., Lourenço, A., López-Fernández, H., Reboiro-Jato, M., \& Fdez-Riverola, F. (2013). Web scraping technologies in an API world. Briefings in bioinformatics, 15(5), 788-797.
+\item Niranjanamurthy, M., Kumar, R. A., Srinivas, S., \& Manoj, R. K. (2014). Research Study on Web Application Testing using Selenium Testing Framework. International Journal of Computer Science and Mobile Computing (IJCSMC).
+\item Hackinger, J. (2018). DataGorri: a tool for automated data collection of tabular web content. NETNOMICS: Economic Research and Electronic Networking, 19(1-2), 31-41.
+\item Stewart, S., \& Burns, D. (2012). WebDriver. Working draft, W3C.
+\item DataMiner (2019). Recuperado de https://data-miner.io/ .
+\item Octoparse (2019). Recuperado de https://www.octoparse.com/ .
+\item Boettcher, I. (2015) Automatic data collection on the Internet (web scraping).
+
+\end{itemize}
+
+\break
 
 \end{document}
