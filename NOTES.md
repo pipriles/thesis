@@ -25,6 +25,7 @@
   - Features
   - UI Decisions
 - Chapter 5 (Conclusiones y Recomendaciones)
+- Referencias Bibliograficas
 
 ## Resources
 
