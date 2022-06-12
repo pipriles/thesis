@@ -28,6 +28,7 @@
 
 \renewcommand\thesection{\arabic{section}.}
 \renewcommand\thesubsection{\thesection\arabic{subsection}.}
+\renewcommand\thesubsubsection{\thesection\arabic{subsection}.\arabic{subsubsection}.}
 
 \renewcommand{\cftaftertoctitle}{\hfill}
 \renewcommand{\contentsname}
@@ -38,6 +39,7 @@
 
 \titlespacing{\section}{0pt}{0pt}{0pt}
 \titlespacing{\subsection}{0pt}{0pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
 
 %\titleformat{\chapter}[block]
 %  {\centering\bfseries\MakeUppercase}{\chaptertitlename \thechapter:}{1em}{}
@@ -275,21 +277,50 @@ En contraste con todas estas herramientas, en este proyecto se busca hacer una h
 
 A continuación se presentan múltiples conceptos en el marco de las herramientas para extraer información de paginas web.
 
-Extensión de Navegador
+\subsection{Extensión de Navegador}
 
-De acuerdo a \cite{md2022extensions}, una extensión es un programa que aumenta la funcionalidad del navegador. Las extensiones funcionan de manera similar entre las mayorías de los navegadores, por lo general consisten en un content script y un background script
+De acuerdo a \cite{md2022extensions}, una extensión es un programa que aumenta la funcionalidad del navegador. Las extensiones se componen de scripts que se ejecutan en segundo plano y de scripts que se inyectan cuando se carga una pagina web, a estos scripts se le denominan background scripts y content scripts respectivamente.
 
-Web Scraping
+\subsubsection{Background scripts}
 
-APIs
+Los background scripts son usados para mantener estado a largo plazo o realizar cualquier operación que no dependa del tiempo de vida de una pagina web \cite{md2022background}. \par
+Sirven para manejar las comunicaciones de los content scripts, haciendo posible establecer la comunicación entre el contexto de la pagina actual y la extensión.
 
-Selenium IDE
+\subsubsection{Content scripts}
 
-React
+Los content scripts son scripts que se ejecutan en la misma página que el usuario esta navegando, estos scripts tienen acceso a todos los elementos del DOM de la página, pero no pueden acceder a la API del navegador \cite{chrome2022contentscripts}. \par
 
-Redux
+Cualquier acción que se desee realizar en la pagina debe ser implementada dentro de los content scripts para ser ejecutada, de esa forman se implementan los comandos que el usuario puede seleccionar dentro de la herramienta.
 
-TypeScript
+\subsection{Web Scraping}
+
+El web scraping es un proceso de extracción de datos de sitios web, el objetivo es obtener los datos de la página web y convertirlos en otro formato o almacenarlos en otro lugar. \cite{cording2011algorithms}
+
+El web scraping puede ser utilizado para diversos fines, por ejemplo, puede ser utilizado para generar reportes de contenidos de un sitio web, para obtener datos de estadísticas de precios de diferentes tiendas, para obtener datos para un análisis o para una investigación, entre otros.
+
+\subsection{APIs}
+
+La API (Application Programming Interface) es una interfaz de comunicación que provee una manera de interactuar con un servicio. Las API son utilizadas por desarrolladores para poder integrar aplicaciones y servicios dentro de sus aplicaciones y aplicaciones web. \cite{glez2014web}
+
+\subsection{Selenium IDE}
+
+Selenium IDE es una herramienta de automatización de pruebas de software de código abierto, que permite a los usuarios crear, editar, depurar y ejecutar scripts de prueba \cite{selenium_documentation_2022}.
+
+Selenium IDE es una herramienta de código abierto desarrollada por Selenium, la cual es una plataforma de automatización de pruebas de software de código abierto. Fue creada en 2006 por Jason Huggins, quien también creó Selenium Remote Control (Selenium RC).
+
+\subsection{React}
+
+React es una librería JavaScript de código abierto creada por Facebook. Se utiliza con fines de creación de interfaces de usuario y Single Page Applications. React permite a los desarrolladores crear aplicaciones web de alta calidad mediante el uso de componentes reutilizables de código \cite{aggarwal2018modern}.
+
+\subsection{Redux}
+
+Redux es un contenedor de estado predecible para aplicaciones, esto significa que los cambios al estado pueden identificarse facilmente al ser un solo estado centralizado \cite{caspers2017react} .
+
+Al tener toda la información del estado de la aplicación en un solo lugar se hace mas fácil implementar funciones para importar y exportar recetas de extracción.
+
+\subsection{TypeScript}
+
+TypeScript es un superset de JavaScript de código abierto creado por Microsoft. TypeScript añade soporte para tipos de datos, clases y modules a JavaScript. TypeScript permite a los desarrolladores crear aplicaciones JavaScript de mayor calidad mediante el uso de tipos de datos \cite{typescript2022}.
 
 % ----------------- %
 
