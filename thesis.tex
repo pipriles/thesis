@@ -45,7 +45,7 @@
 %  {\centering\bfseries\MakeUppercase}{\chaptertitlename \thechapter:}{1em}{}
 %\titlespacing*{\chapter}{0pt}{0pt}{0pt}
 
-\renewcommand{\bibname}{Referencessssss} 
+\renewcommand{\bibname}{References} 
 
 %\titlecontents{section}[]{}
 %{\thecontentslabel\enspace}{}
@@ -175,7 +175,7 @@ Sin embargo, hay casos en los que resulta más convenientes usar un navegador, s
 
 Dicho esto, la finalidad de este proyecto radica en la implementación de una herramienta que simplifique el proceso de extracción de datos de la web. Para ello se propone realizar una extensión de navegador que sirva como interfaz para definir "recetas" que especifican a través de comandos ingresados por el usuario la manera de interactuar y extraer información de la página.
 
-La ventaja de utilizar una extensión para controlar el navegador no solo radica en el hecho de ser una solución multi plataforma, sino también se puede notar en casos donde la extracción de datos requiere intervención humana, por ejemplo, en una página donde se tenga que iniciar sesión y ingresar un código de seguridad que es enviado al correo. Sería muy tedioso realizar un programa que se encargue de todo eso, es por ello que una solución que explote el acceso al estado actual del navegador a través de una extensión es muy apropiado.
+La ventaja de utilizar una extensión para controlar el navegador no solo radica en el hecho de ser una solución multiplataforma, sino también se puede notar en casos donde la extracción de datos requiere intervención humana, por ejemplo, en una página donde se tenga que iniciar sesión y ingresar un código de seguridad que es enviado al correo. Sería muy tedioso realizar un programa que se encargue de todo eso, es por ello que una solución que explote el acceso al estado actual del navegador a través de una extensión es muy apropiado.
 
 Para definir qué páginas van a ser procesadas, estas deben ser importadas para luego ser aplicadas como parámetros de la recetas. Siguiendo un enfoque funcional, la información extraída sería el resultado de la función que en este caso es la receta, el usuario tendría la libertad de especificar el formato y estrategia para exportar los resultados obtenidos.
 
@@ -314,13 +314,13 @@ React es una librería JavaScript de código abierto creada por Facebook. Se uti
 
 \subsection{Redux}
 
-Redux es un contenedor de estado predecible para aplicaciones, esto significa que los cambios al estado pueden identificarse facilmente al ser un solo estado centralizado \cite{caspers2017react} .
+Redux es un contenedor de estado predecible para aplicaciones, esto significa que los cambios al estado pueden identificarse fácilmente al ser un solo estado centralizado \cite{caspers2017react} .
 
 Al tener toda la información del estado de la aplicación en un solo lugar se hace mas fácil implementar funciones para importar y exportar recetas de extracción.
 
 \subsection{TypeScript}
 
-TypeScript es un superset de JavaScript de código abierto creado por Microsoft. TypeScript añade soporte para tipos de datos, clases y modulos a JavaScript. TypeScript permite a los desarrolladores crear aplicaciones JavaScript de mayor calidad mediante el uso de tipos de datos \cite{typescript2022}.
+TypeScript es un superset de JavaScript de código abierto creado por Microsoft. TypeScript añade soporte para tipos de datos, clases y módulos a JavaScript. TypeScript permite a los desarrolladores crear aplicaciones JavaScript de mayor calidad mediante el uso de tipos de datos \cite{typescript2022}.
 
 % ----------------- %
 
@@ -332,7 +332,7 @@ La metodología a ser usada en un proyecto depende de la disposición de los rec
 
 Concretamente se ha seleccionado para este proyecto Scrum, el cual es un framework iterativo e incremental para planificar el desarrollo de un proyecto a través de un enfoque empírico donde el problema no tiene que ser completamente entendido o definido antes de atacarlo. Scrum define un conjunto de principios y estrategias a seguir en el desarrollo del proyecto, previamente al desarrollo se realiza un "Product Backlog" donde se definen los requerimientos del proyecto.
 
-Se desarrollo el proyecto durante ciclos de 2 semanas para trabajar en los requerimientos específicos definidos para el ciclo actual en el "Sprint Backlog", al final de cada ciclo se hizo una revisión del estado del proyecto y se planificó acorde el siguiente ciclo.
+Se desarrolló el proyecto durante ciclos de 2 semanas para trabajar en los requerimientos específicos definidos para el ciclo actual en el "Sprint Backlog", al final de cada ciclo se hizo una revisión del estado del proyecto y se planificó acorde el siguiente ciclo.
 
 En resumen el proceso de desarrollo consiste en:
 
@@ -345,6 +345,24 @@ En resumen el proceso de desarrollo consiste en:
 
 \end{itemize}
 
+\section[Procedimiento]{PROCEDIMIENTO}
+
+Las primeras fases del proyecto consistieron en el diseño de la aplicación desde un punto de vista funcional para el usuario final, de esa manera se determinó las características principales a implementar a través de como sería la interacción básica con el programa. 
+
+Debido a la naturaleza del problema se consideraron múltiples ideas para describir al programa la información que se busca extraer del navegador. La abstracción fundamental que se decidió desarrollar en este proyecto consiste en que cada acción que se pueda realizar incluyendo la extracción de la información, tendría un comando equivalente con un conjunto de parámetros que permiten describir por ejemplo el objeto dentro de la pagina web que contenga la información.
+
+Para etiquetar cada pedazo de información se decidió asociar un nombre o etiqueta a un comando que tendrá una correspondencia con una propiedad en el objeto que mantiene toda los datos extraídos. Una vez se ejecute cada comando se creara un objeto con la información seleccionada que aparecerá en un panel dentro del programa con el fin de poder visualizar en tiempo real la estructura de los resultados.
+
+Con el fin de mantener un cierto nivel de simplicidad en la interfaz se dividió la vista principal en un panel donde se definen los comandos a usar, un panel para interactuar con el comando seleccionado y otro panel que contiene a través de pestañas las vistas para importar los URLs a procesar, exportar la información extraída y visualizar una consola con mensajes informativos del estatus del programa.
+
+% Foto de la interfaz?
+
+Junto a la idea de abstraer todo a través de comandos también se concibió un sistema de reproducción de las recetas similar a como un reproductor de musica funciona con botones de reproducir, pausar y parar. Esto permitiría un gran nivel de flexibilidad al probar los comandos usados.
+
+Para implementar todas estas características que requieren de alguna manera u otra interactuar con el estado actual del navegador fue necesario crear un sistema de comunicación entre los content scripts y el background script.
+
+Al agregar cada funcionalidad se probaba rigurosamente que efectivamente todo funcionaba perfectamente antes de avanzar y integrar lo cambios a la rama principal de desarrollo.
+
 \break
 
 % ----------------- %
@@ -355,36 +373,13 @@ En resumen el proceso de desarrollo consiste en:
 % Mention git?
 % Mention feature tests
 
-\section[Plan de Trabajo]{PLAN DE TRABAJO}
-
-\noindent
-\begin{tabularx}{1\textwidth}{ |X|l|l|l| }
-
-\hline
-Actividad & Inicio & Fin & Tiempo Estimado \\
-\hline
-Realizar una investigación en el área de las herramientas interactivas para la extracción de información de paginas web. & Abril 2019 & Abril 2019 & 1 semana \\
-\hline
-Seleccionar la metodologia de desarrollo de software que mejor se ajuste a este proyecto. & Abril 2019 & Mayo 2019 & 1 semana \\
-\hline
-Seleccionar un conjunto de tecnologías que hagan posible el desarrollo de esta herramienta. & Mayo 2019 & Mayo 2019 & 1 semana \\
-\hline
-Definir un modelo de comunicación entre el programa y la web. & Mayo 2019 & Mayo 2019 & 1 semana \\
-\hline
-Diseñar los procesos a llevar a cabo por el usuario para extraer, importar y exportar información al utilzar el programa. & Mayo 2019 & Mayo 2019 & 2 semanas \\
-\hline
-Desarrollar un prototipo funcional del programa. & Mayo 2019 & Julio 2019 & 2 Meses \\
-\hline
-Redactar el Trabajo Especial de Grado & Agosto 2019 & Agosto 2019 & 3 Semanas \\
-\hline
-  
-\end{tabularx}
-
 \break
 
 % ----------------- %
 
 \chapter{Resultados}
+
+
 
 % - Share findings and results
 % - Share development methology
@@ -393,7 +388,6 @@ Redactar el Trabajo Especial de Grado & Agosto 2019 & Agosto 2019 & 3 Semanas \\
 %   - Share software features
 %   - Cite multiple resources and existing works
 % - Problems encountered when creating a browser based web scraper
-
 
 % ----------------- %
 
